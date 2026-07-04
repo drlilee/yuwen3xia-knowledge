@@ -786,62 +786,45 @@
     import { Transformer } from 'markmap-lib';
     import { Markmap } from 'markmap-view';
 
-    const mmData = {
-        title: "三年级下册·语文知识点",
-        children: [
-            {
-                title: "易读错的字（易错拼音）",
-                children: [
-                    { title: "第一单元：伶俐(líng)、掠过(lüè)、沾水(zhān)、纤细(xiān)、莲蓬(péng)、姿势(zī)" },
-                    { title: "第二单元：耕种(gēng)、懦弱(nuò)、谦虚(xū)、欣赏(xīn)、遵循(zūn)" },
-                    { title: "第三单元：屠苏(sū)、朝鲜(xiǎn)、前爪(zhǎo)、欧洲(zhōu)" },
-                    { title: "第四单元：干燥(zào)、灼伤(zhuó)、吻合(wěn)、缝隙(fèng)" },
-                    { title: "五~八单元：栅栏(zhà)、红彤彤(tōng)、呈现(chéng)" }
-                ]
-            },
-            {
-                title: "多音字（30个）",
-                children: [
-                    { title: "行(háng/xíng) 得(dé/de/děi) 散(sàn/sǎn)" },
-                    { title: "挨(āi/ái) 骨(gū/gǔ) 折(zhé/shé/zhē)" },
-                    { title: "盛(shèng/chéng) 朝(cháo/zhāo) 禁(jīn/jìn)" },
-                    { title: "称(chēng/chèn) 鲜(xiān/xiǎn) 爪(zhǎo/zhuǎ)" },
-                    { title: "卷(juǎn/juàn) 缝(féng/fèng) 差(chà/chā/chāi/cī)" },
-                    { title: "模(mó/mú) 闷(mēn/mèn) 便(biàn/pián)" }
-                ]
-            },
-            {
-                title: "易写错的字",
-                children: [
-                    { title: "第一单元：燕、融、聚、蓬、胀、崇、减" },
-                    { title: "第二单元：释、颈、虚、懦、赏、映、傲" },
-                    { title: "第四单元：醒、蜜、辨、修、检、跨" },
-                    { title: "全册高频：爽、舞、霸、艳、蜜/密、辩/辨、拨/拔" }
-                ]
-            },
-            {
-                title: "形近字（13组）",
-                children: [
-                    { title: "崇vs祟 蓬vs篷 沾vs粘 凑vs奏" },
-                    { title: "裂vs烈 株vs珠 待vs侍 蜜vs密" },
-                    { title: "辨vs辩vs辫 拨vs拔 幻vs幼 历vs厉 酒vs洒" }
-                ]
-            },
-            {
-                title: "核心考点提示",
-                children: [
-                    { title: "平翘舌音区分：zh/ch/sh 与 z/c/s" },
-                    { title: "前后鼻音区分：in/en vs ing/eng" },
-                    { title: "多音字据词定音" },
-                    { title: "形近字辨义组词" }
-                ]
-            }
-        ]
-    };
+    const markdown = `
+# 三年级下册·语文知识点
+
+## 易读错的字（易错拼音）
+- 第一单元：伶俐(líng)、掠过(lüè)、沾水(zhān)、纤细(xiān)、莲蓬(péng)、姿势(zī)
+- 第二单元：耕种(gēng)、懦弱(nuò)、谦虚(xū)、欣赏(xīn)、遵循(zūn)
+- 第三单元：屠苏(sū)、朝鲜(xiǎn)、前爪(zhǎo)、欧洲(zhōu)
+- 第四单元：干燥(zào)、灼伤(zhuó)、吻合(wěn)、缝隙(fèng)
+- 五~八单元：栅栏(zhà)、红彤彤(tōng)、呈现(chéng)
+
+## 多音字
+- 行(háng/xíng) 得(dé/de/děi) 散(sàn/sǎn)
+- 挨(āi/ái) 骨(gū/gǔ) 折(zhé/shé/zhē)
+- 盛(shèng/chéng) 朝(cháo/zhāo) 禁(jīn/jìn)
+- 称(chēng/chèn) 鲜(xiān/xiǎn) 爪(zhǎo/zhuǎ)
+- 卷(juǎn/juàn) 缝(féng/fèng) 差(chà/chā/chāi/cī)
+- 模(mó/mú) 闷(mēn/mèn) 便(biàn/pián)
+
+## 易写错的字
+- 第一单元：燕、融、聚、蓬、胀、崇、减
+- 第二单元：释、颈、虚、懦、赏、映、傲
+- 第四单元：醒、蜜、辨、修、检、跨
+- 全册高频：爽、舞、霸、艳、蜜/密、辩/辨、拨/拔
+
+## 形近字
+- 崇vs祟 蓬vs篷 沾vs粘 凑vs奏
+- 裂vs烈 株vs珠 待vs侍 蜜vs密
+- 辨vs辩vs辫 拨vs拔 幻vs幼 历vs厉 酒vs洒
+
+## 核心考点提示
+- 平翘舌音区分：zh/ch/sh 与 z/c/s
+- 前后鼻音区分：in/en 与 ing/eng
+- 多音字据词定音
+- 形近字辨义组词
+`;
 
     const svg = document.getElementById('markmap-svg');
     const transformer = new Transformer();
-    const root = transformer.transform(mmData);
+    const { root } = transformer.transform(markdown);
     Markmap.create(svg, {
         zoomOnMaxHeight: 0.7,
         colorFreezeLevel: 2,
