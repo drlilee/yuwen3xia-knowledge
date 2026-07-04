@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024人教版三年级语文下册 · 知识点总览</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Markmap -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4/dist/browser/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4/dist/browser/index.js"></script>
+    <style>
+        /* ========== Reset & Base ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            background: #f0f4f8;
+            color: #2d3748;
+            line-height: 1.7;
+        }
+
+        /* ========== Header ========== */
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #2c5282 100%);
+            color: #fff;
+            padding: 2.5rem 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: "语文";
+            position: absolute;
+            right: -20px;
+            bottom: -40px;
+            font-size: 180px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.04);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        .header p {
+            margin-top: 0.5rem;
+            opacity: 0.85;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 1;
+        }
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== Navigation ========== */
+        .nav-bar {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            padding: 0.6rem 1rem;
+        }
+        .nav-bar a {
+            text-decoration: none;
+            color: #4a5568;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            background: #ebf4ff;
+            color: #2b6cb0;
+        }
+
+        /* ========== Container ========== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ========== Section ========== */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a365d;
+            padding-bottom: 0.6rem;
+            border-bottom: 3px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .section-title i {
+            color: #2b6cb0;
+            font-size: 1.3rem;
+        }
+
+        /* ========== Cards ========== */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        /* ========== Tables ========== */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+        thead th {
+            background: #ebf4ff;
+            color: #2b6cb0;
+            font-weight: 600;
+            text-align: left;
+            padding: 0.7rem 0.8rem;
+            border-bottom: 2px solid #bee3f8;
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid #edf2f7;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+        .pron { color: #c53030; font-weight: 600; font-family: "Times New Roman", serif; }
+        .tag { display: inline-block; background: #f0fff4; color: #276749; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.78rem; font-weight: 500; }
+        .tag-warn { background: #fffaf0; color: #9c4221; }
+        .tag-pinyin { background: #ebf8ff; color: #2b6cb0; }
+
+        /* ========== 多音字 ========== */
+        .poly-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.8rem;
+        }
+        .poly-item {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            transition: all 0.2s;
+        }
+        .poly-item:hover {
+            border-color: #bee3f8;
+            box-shadow: 0 2px 8px rgba(43,108,176,0.08);
+        }
+        .poly-char {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: inline-block;
+            min-width: 2rem;
+        }
+        .poly-readings {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1rem;
+            margin-left: 0.5rem;
+        }
+        .poly-reading {
+            font-size: 0.9rem;
+        }
+        .poly-reading .pron {
+            font-size: 0.95rem;
+        }
+
+        /* ========== 形近字 ========== */
+        .shape-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 0.8rem;
+        }
+        .shape-item {
+            background: #fff;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            transition: all 0.2s;
+        }
+        .shape-item:hover {
+            border-color: #fc8181;
+            box-shadow: 0 2px 8px rgba(229,62,62,0.08);
+        }
+        .shape-char {
+            font-weight: 700;
+            color: #c53030;
+        }
+        .shape-desc {
+            color: #4a5568;
+            font-size: 0.88rem;
+        }
+
+        /* ========== 易错字 ========== */
+        .wrong-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.8rem;
+        }
+        .wrong-item {
+            background: #fffaf0;
+            border: 1px solid #feebc8;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+        }
+        .wrong-item strong {
+            color: #c05621;
+            font-size: 1.05rem;
+        }
+
+        /* ========== Mindmap ========== */
+        #mindmap-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            padding: 1rem;
+            min-height: 450px;
+        }
+        #mindmap-container svg {
+            width: 100%;
+            min-height: 450px;
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #718096;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* ========== 考题 ========== */
+        .q-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .q-item:last-child { border-bottom: none; }
+        .q-num {
+            display: inline-block;
+            background: #2b6cb0;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+        .q-text { font-weight: 600; margin-bottom: 0.5rem; }
+        .q-label {
+            display: block;
+            padding: 0.4rem 0.8rem;
+            margin: 0.2rem 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .q-label:hover { background: #ebf4ff; }
+        .q-label input { margin-right: 0.5rem; }
+        .q-correct { background: #f0fff4 !important; color: #276749; font-weight: 600; }
+        .q-wrong { background: #fff5f5 !important; color: #c53030; font-weight: 600; }
+        .q-correct::after, .q-correct .q-answer-feedback { content: " ✓"; color: #38a169; font-weight: 700; }
+        .q-wrong::after, .q-wrong .q-answer-feedback { content: " ✗"; color: #e53e3e; font-weight: 700; }
+        .q-desc { font-size: 0.85rem; color: #718096; margin-top: 0.3rem; padding-left: 2rem; display: none; }
+        .q-desc.show { display: block; }
+        #quiz-submit {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: #2b6cb0;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        #quiz-submit:hover { background: #2c5282; }
+        #quiz-submit:disabled { background: #a0aec0; cursor: not-allowed; }
+        .score-box {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .score-box .score-num {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #2b6cb0;
+        }
+        .score-box .score-label {
+            font-size: 1rem;
+            color: #4a5568;
+        }
+        .q-category { font-size: 0.75rem; color: #718096; margin-left: 2rem; }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 1.5rem; }
+            .section-title { font-size: 1.2rem; }
+            .poly-grid { grid-template-columns: 1fr; }
+            .shape-grid { grid-template-columns: 1fr; }
+            .wrong-grid { grid-template-columns: 1fr; }
+            .nav-bar a { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="header">
+    <h1><i class="fas fa-book-open"></i> 三年级语文下册 · 知识点总览</h1>
+    <p>2024年人教版（部编版）全册易错拼音 · 多音字 · 易错字 · 形近字</p>
+    <span class="badge"><i class="far fa-calendar-alt"></i> 2024年修订版 · 共8单元</span>
+</header>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="nav-bar">
+    <a href="#pinyin"><i class="fas fa-volume-up"></i> 易错拼音</a>
+    <a href="#poly"><i class="fas fa-arrows-alt-h"></i> 多音字</a>
+    <a href="#wrong"><i class="fas fa-pen-fancy"></i> 易错字</a>
+    <a href="#shape"><i class="fas fa-not-equal"></i> 形近字</a>
+    <a href="#mindmap"><i class="fas fa-sitemap"></i> 思维导图</a>
+    <a href="#quiz"><i class="fas fa-pencil-alt"></i> 考题</a>
+</nav>
+
+<!-- ==================== MAIN ==================== -->
+<div class="container">
+
+    <!-- ===== 一、易读错的字（易错拼音） ===== -->
+    <section class="section" id="pinyin">
+        <h2 class="section-title"><i class="fas fa-volume-up"></i> 易错拼音</h2>
+
+        <!-- 第一单元 -->
+        <div class="card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th style="width:50%">词语</th><th style="width:30%">正确读音</th><th style="width:20%">易错提示</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>鸳鸯</td><td><span class="pron">yuān yāng</span></td><td><span class="tag">前后鼻音</span></td></tr>
+                        <tr><td>惠崇</td><td><span class="pron">huì chóng</span></td><td><span class="tag">翘舌音</span></td></tr>
+                        <tr><td>蒌蒿</td><td><span class="pron">lóu hāo</span></td><td>韵母 ou / ao</td></tr>
+                        <tr><td>河豚</td><td><span class="pron">hé tún</span></td><td>韵母 un</td></tr>
+                        <tr><td>伶俐</td><td><span class="pron">líng lì</span></td><td><span class="tag tag-pinyin">后鼻音</span></td></tr>
+                        <tr><td>掠过</td><td><span class="pron">lüè guò</span></td><td>韵母 üe</td></tr>
+                        <tr><td>沾水</td><td><span class="pron">zhān shuǐ</span></td><td><span class="tag">翘舌音 zh</span></td></tr>
+                        <tr><td>闲散</td><td><span class="pron">xián sǎn</span></td><td><span class="tag">平舌音 s</span></td></tr>
+                        <tr><td>纤细</td><td><span class="pron">xiān xì</span></td><td><span class="tag tag-warn">勿读成 qiān</span></td></tr>
+                        <tr><td>莲蓬</td><td><span class="pron">lián péng</span></td><td><span class="tag tag-pinyin">后鼻音 eng</span></td></tr>
+                        <tr><td>姿势</td><td><span class="pron">zī shì</span></td><td><span class="tag">平翘舌</span></td></tr>
+                        <tr><td>啄木鸟</td><td><span class="pron">zhuó mù niǎo</span></td><td><span class="tag">翘舌音 zhuo</span></td></tr>
+                        <tr><td>益虫</td><td><span class="pron">yì chóng</span></td><td>整体认读音节</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 第二单元 -->
+        <div class="card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>词语</th><th>正确读音</th><th>易错提示</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>耕种</td><td><span class="pron">gēng zhòng</span></td><td><span class="tag tag-pinyin">后鼻音 eng</span></td></tr>
+                        <tr><td>解释</td><td><span class="pron">jiě shì</span></td><td><span class="tag">翘舌音 sh</span></td></tr>
+                        <tr><td>接触</td><td><span class="pron">jiē chù</span></td><td><span class="tag">翘舌音 ch</span></td></tr>
+                        <tr><td>懦弱</td><td><span class="pron">nuò ruò</span></td><td>声母 n / r</td></tr>
+                        <tr><td>陶罐</td><td><span class="pron">táo guàn</span></td><td>前后鼻音 an</td></tr>
+                        <tr><td>谦虚</td><td><span class="pron">qiān xū</span></td><td>前后鼻 ian</td></tr>
+                        <tr><td>狮子</td><td><span class="pron">shī zi</span></td><td><span class="tag">翘舌音 sh</span></td></tr>
+                        <tr><td>欣赏</td><td><span class="pron">xīn shǎng</span></td><td><span class="tag tag-pinyin">前后鼻音 in/ang</span></td></tr>
+                        <tr><td>匀称</td><td><span class="pron">yún chèn</span></td><td>前鼻音 un/en</td></tr>
+                        <tr><td>遵循</td><td><span class="pron">zūn xún</span></td><td><span class="tag">平舌音 z</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 第三单元 -->
+        <div class="card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>词语</th><th>正确读音</th><th>易错提示</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>屠苏</td><td><span class="pron">tú sū</span></td><td><span class="tag">平舌音 s</span></td></tr>
+                        <tr><td>欲断魂</td><td><span class="pron">yù duàn hún</span></td><td>前后鼻音 un</td></tr>
+                        <tr><td>蔡伦</td><td><span class="pron">cài lún</span></td><td><span class="tag">平舌音 c</span></td></tr>
+                        <tr><td>朝鲜</td><td><span class="pron">cháo xiǎn</span></td><td><span class="tag tag-warn">鲜 读 xiǎn</span></td></tr>
+                        <tr><td>欧洲</td><td><span class="pron">ōu zhōu</span></td><td><span class="tag">翘舌音 zh</span></td></tr>
+                        <tr><td>前爪</td><td><span class="pron">qián zhǎo</span></td><td><span class="tag tag-warn">爪 读 zhǎo</span></td></tr>
+                        <tr><td>智慧</td><td><span class="pron">zhì huì</span></td><td><span class="tag">翘舌音 zh</span></td></tr>
+                        <tr><td>设计</td><td><span class="pron">shè jì</span></td><td><span class="tag">翘舌音 sh</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 第四单元 -->
+        <div class="card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>词语</th><th>正确读音</th><th>易错提示</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>干燥</td><td><span class="pron">gān zào</span></td><td><span class="tag">平舌音 z</span></td></tr>
+                        <tr><td>灼伤</td><td><span class="pron">zhuó shāng</span></td><td><span class="tag">翘舌音 zh/sh</span></td></tr>
+                        <tr><td>淡雅</td><td><span class="pron">dàn yǎ</span></td><td>前后鼻音 an</td></tr>
+                        <tr><td>吻合</td><td><span class="pron">wěn hé</span></td><td>前鼻音 en</td></tr>
+                        <tr><td>逆风</td><td><span class="pron">nì fēng</span></td><td>声母 n</td></tr>
+                        <tr><td>陌生</td><td><span class="pron">mò shēng</span></td><td><span class="tag tag-pinyin">翘舌+后鼻</span></td></tr>
+                        <tr><td>缝隙</td><td><span class="pron">fèng xì</span></td><td><span class="tag tag-pinyin">后鼻音 eng</span></td></tr>
+                        <tr><td>掀起</td><td><span class="pron">xiān qǐ</span></td><td><span class="tag tag-warn">勿读成 xīn</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 第五~八单元 -->
+        <div class="card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>词语</th><th>正确读音</th><th>易错提示</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>栅栏</td><td><span class="pron">zhà lan</span></td><td><span class="tag">翘舌音 zh</span></td></tr>
+                        <tr><td>鳄鱼</td><td><span class="pron">è yú</span></td><td>零声母</td></tr>
+                        <tr><td>香肠</td><td><span class="pron">xiāng cháng</span></td><td><span class="tag">翘舌音 ch</span></td></tr>
+                        <tr><td>呈现</td><td><span class="pron">chéng xiàn</span></td><td><span class="tag tag-pinyin">翘舌+后鼻</span></td></tr>
+                        <tr><td>红彤彤</td><td><span class="pron">hóng tōng tōng</span></td><td><span class="tag tag-warn">勿读成 tóng</span></td></tr>
+                        <tr><td>蜡烛</td><td><span class="pron">là zhú</span></td><td><span class="tag">翘舌音 zh</span></td></tr>
+                        <tr><td>模型</td><td><span class="pron">mó xíng</span></td><td><span class="tag tag-pinyin">后鼻音 ing</span></td></tr>
+                        <tr><td>迅速</td><td><span class="pron">xùn sù</span></td><td><span class="tag">平舌音 s</span></td></tr>
+                        <tr><td>谚语</td><td><span class="pron">yàn yǔ</span></td><td>前鼻音 an</td></tr>
+                        <tr><td>船员</td><td><span class="pron">chuán yuán</span></td><td><span class="tag">翘舌音 ch</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 二、多音字 ===== -->
+    <section class="section" id="poly">
+        <h2 class="section-title"><i class="fas fa-arrows-alt-h"></i> 多音字</h2>
+        <div class="card">
+            <div class="poly-grid">
+                <div class="poly-item"><span class="poly-char">行</span><span class="poly-readings"><span class="poly-reading"><span class="pron">háng</span> 银行</span><span class="poly-reading"><span class="pron">xíng</span> 行走</span></span></div>
+                <div class="poly-item"><span class="poly-char">得</span><span class="poly-readings"><span class="poly-reading"><span class="pron">dé</span> 得到</span><span class="poly-reading"><span class="pron">de</span> 跑得快</span><span class="poly-reading"><span class="pron">děi</span> 得亏</span></span></div>
+                <div class="poly-item"><span class="poly-char">散</span><span class="poly-readings"><span class="poly-reading"><span class="pron">sàn</span> 散步</span><span class="poly-reading"><span class="pron">sǎn</span> 闲散</span></span></div>
+                <div class="poly-item"><span class="poly-char">杆</span><span class="poly-readings"><span class="poly-reading"><span class="pron">gān</span> 旗杆</span><span class="poly-reading"><span class="pron">gǎn</span> 笔杆</span></span></div>
+                <div class="poly-item"><span class="poly-char">似</span><span class="poly-readings"><span class="poly-reading"><span class="pron">sì</span> 似乎</span><span class="poly-reading"><span class="pron">shì</span> 似的</span></span></div>
+                <div class="poly-item"><span class="poly-char">挨</span><span class="poly-readings"><span class="poly-reading"><span class="pron">āi</span> 挨挨挤挤</span><span class="poly-reading"><span class="pron">ái</span> 挨打</span></span></div>
+                <div class="poly-item"><span class="poly-char">骨</span><span class="poly-readings"><span class="poly-reading"><span class="pron">gū</span> 花骨朵</span><span class="poly-reading"><span class="pron">gǔ</span> 骨头</span></span></div>
+                <div class="poly-item"><span class="poly-char">为</span><span class="poly-readings"><span class="poly-reading"><span class="pron">wéi</span> 作为</span><span class="poly-reading"><span class="pron">wèi</span> 为什么</span></span></div>
+                <div class="poly-item"><span class="poly-char">折</span><span class="poly-readings"><span class="poly-reading"><span class="pron">zhé</span> 折断</span><span class="poly-reading"><span class="pron">shé</span> 折本</span><span class="poly-reading"><span class="pron">zhē</span> 折腾</span></span></div>
+                <div class="poly-item"><span class="poly-char">盛</span><span class="poly-readings"><span class="poly-reading"><span class="pron">shèng</span> 盛开</span><span class="poly-reading"><span class="pron">chéng</span> 盛饭</span></span></div>
+                <div class="poly-item"><span class="poly-char">朝</span><span class="poly-readings"><span class="poly-reading"><span class="pron">cháo</span> 王朝</span><span class="poly-reading"><span class="pron">zhāo</span> 朝霞</span></span></div>
+                <div class="poly-item"><span class="poly-char">倒</span><span class="poly-readings"><span class="poly-reading"><span class="pron">dǎo</span> 跌倒</span><span class="poly-reading"><span class="pron">dào</span> 倒茶</span></span></div>
+                <div class="poly-item"><span class="poly-char">禁</span><span class="poly-readings"><span class="poly-reading"><span class="pron">jīn</span> 不禁</span><span class="poly-reading"><span class="pron">jìn</span> 禁止</span></span></div>
+                <div class="poly-item"><span class="poly-char">撒</span><span class="poly-readings"><span class="poly-reading"><span class="pron">sā</span> 撒手</span><span class="poly-reading"><span class="pron">sǎ</span> 撒种</span></span></div>
+                <div class="poly-item"><span class="poly-char">挣</span><span class="poly-readings"><span class="poly-reading"><span class="pron">zhēng</span> 挣扎</span><span class="poly-reading"><span class="pron">zhèng</span> 挣脱</span></span></div>
+                <div class="poly-item"><span class="poly-char">称</span><span class="poly-readings"><span class="poly-reading"><span class="pron">chēng</span> 称呼</span><span class="poly-reading"><span class="pron">chèn</span> 匀称</span></span></div>
+                <div class="poly-item"><span class="poly-char">鲜</span><span class="poly-readings"><span class="poly-reading"><span class="pron">xiān</span> 鲜花</span><span class="poly-reading"><span class="pron">xiǎn</span> 朝鲜</span></span></div>
+                <div class="poly-item"><span class="poly-char">爪</span><span class="poly-readings"><span class="poly-reading"><span class="pron">zhǎo</span> 前爪</span><span class="poly-reading"><span class="pron">zhuǎ</span> 爪子</span></span></div>
+                <div class="poly-item"><span class="poly-char">卷</span><span class="poly-readings"><span class="poly-reading"><span class="pron">juǎn</span> 卷起</span><span class="poly-reading"><span class="pron">juàn</span> 试卷</span></span></div>
+                <div class="poly-item"><span class="poly-char">缝</span><span class="poly-readings"><span class="poly-reading"><span class="pron">féng</span> 缝补</span><span class="poly-reading"><span class="pron">fèng</span> 缝隙</span></span></div>
+                <div class="poly-item"><span class="poly-char">嚷</span><span class="poly-readings"><span class="poly-reading"><span class="pron">rǎng</span> 叫嚷</span><span class="poly-reading"><span class="pron">rāng</span> 嚷嚷</span></span></div>
+                <div class="poly-item"><span class="poly-char">量</span><span class="poly-readings"><span class="poly-reading"><span class="pron">liáng</span> 测量</span><span class="poly-reading"><span class="pron">liàng</span> 重量</span></span></div>
+                <div class="poly-item"><span class="poly-char">斗</span><span class="poly-readings"><span class="poly-reading"><span class="pron">dǒu</span> 北斗星</span><span class="poly-reading"><span class="pron">dòu</span> 搏斗</span></span></div>
+                <div class="poly-item"><span class="poly-char">系</span><span class="poly-readings"><span class="poly-reading"><span class="pron">xì</span> 关系</span><span class="poly-reading"><span class="pron">jì</span> 系鞋带</span></span></div>
+                <div class="poly-item"><span class="poly-char">种</span><span class="poly-readings"><span class="poly-reading"><span class="pron">zhǒng</span> 种子</span><span class="poly-reading"><span class="pron">zhòng</span> 种地</span></span></div>
+                <div class="poly-item"><span class="poly-char">空</span><span class="poly-readings"><span class="poly-reading"><span class="pron">kōng</span> 空气</span><span class="poly-reading"><span class="pron">kòng</span> 空闲</span></span></div>
+                <div class="poly-item"><span class="poly-char">差</span><span class="poly-readings"><span class="poly-reading"><span class="pron">chà</span> 差不多</span><span class="poly-reading"><span class="pron">chā</span> 差别</span><span class="poly-reading"><span class="pron">chāi</span> 出差</span><span class="poly-reading"><span class="pron">cī</span> 参差</span></span></div>
+                <div class="poly-item"><span class="poly-char">和</span><span class="poly-readings"><span class="poly-reading"><span class="pron">hé</span> 和平</span><span class="poly-reading"><span class="pron">huó</span> 和面</span><span class="poly-reading"><span class="pron">huò</span> 和弄</span></span></div>
+                <div class="poly-item"><span class="poly-char">便</span><span class="poly-readings"><span class="poly-reading"><span class="pron">biàn</span> 方便</span><span class="poly-reading"><span class="pron">pián</span> 便宜</span></span></div>
+                <div class="poly-item"><span class="poly-char">闷</span><span class="poly-readings"><span class="poly-reading"><span class="pron">mēn</span> 闷热</span><span class="poly-reading"><span class="pron">mèn</span> 沉闷</span></span></div>
+                <div class="poly-item"><span class="poly-char">佛</span><span class="poly-readings"><span class="poly-reading"><span class="pron">fó</span> 仿佛</span><span class="poly-reading"><span class="pron">fú</span> 佛祖</span></span></div>
+                <div class="poly-item"><span class="poly-char">模</span><span class="poly-readings"><span class="poly-reading"><span class="pron">mó</span> 模型</span><span class="poly-reading"><span class="pron">mú</span> 模样</span></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 三、易写错的字 ===== -->
+    <section class="section" id="wrong">
+        <h2 class="section-title"><i class="fas fa-pen-fancy"></i> 易错字</h2>
+
+        <div class="card">
+            <div class="wrong-grid">
+                <div class="wrong-item"><strong>燕</strong> — 上部是"廿"，不要多写横；下部是"灬"</div>
+                <div class="wrong-item"><strong>融</strong> — 左边"鬲"右边"虫"，笔画多注意紧凑</div>
+                <div class="wrong-item"><strong>聚</strong> — 下部是"众"，不要写成"象"</div>
+                <div class="wrong-item"><strong>蓬</strong> — 上下结构，草字头+逢，别漏走之底</div>
+                <div class="wrong-item"><strong>胀</strong> — 左"月"右"长"，不要写成"张"</div>
+                <div class="wrong-item"><strong>崇</strong> — 上"山"下"宗"，不要写成"祟"</div>
+                <div class="wrong-item"><strong>减</strong> — 左"冫"右"咸"，中间不要多写一横</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="wrong-grid">
+                <div class="wrong-item"><strong>释</strong> — 左边"采"（撇+米），不是"釆"</div>
+                <div class="wrong-item"><strong>颈</strong> — 第二笔是"点"</div>
+                <div class="wrong-item"><strong>虚</strong> — 半包围结构，部首是"虍"</div>
+                <div class="wrong-item"><strong>懦</strong> — 右上"雨"第三笔是"横钩"</div>
+                <div class="wrong-item"><strong>赏</strong> — 下边是"贝"，不是"见"</div>
+                <div class="wrong-item"><strong>映</strong> — 右边是"央"，不是"英"</div>
+                <div class="wrong-item"><strong>傲</strong> — 左边"亻"，右边"敖"</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="wrong-grid">
+                <div class="wrong-item"><strong>醒</strong> — 左部"酉"不要写成"西"</div>
+                <div class="wrong-item"><strong>蜜</strong> — 下部是"虫"，不要写成"密"</div>
+                <div class="wrong-item"><strong>辨</strong> — 中间是"辶"，不是"讠"</div>
+                <div class="wrong-item"><strong>修</strong> — 中间有一竖，右部三撇要平行</div>
+                <div class="wrong-item"><strong>检</strong> — 左部末笔为点，不要写成"捡"</div>
+                <div class="wrong-item"><strong>跨</strong> — 左窄右宽，"足"末笔为提</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="wrong-grid">
+                <div class="wrong-item"><strong>爽</strong> — 易多笔或少笔，注意笔画顺序</div>
+                <div class="wrong-item"><strong>舞</strong> — 中间部分容易写错，注意四竖</div>
+                <div class="wrong-item"><strong>霸</strong> — 上下结构，"雨"+"革"+"月"</div>
+                <div class="wrong-item"><strong>艳</strong> — 左"丰"右"色"，注意"丰"的竖</div>
+                <div class="wrong-item"><strong>蜜 vs 密</strong> — 蜜=虫（蜜蜂），密=山（茂密）</div>
+                <div class="wrong-item"><strong>辩 vs 辨</strong> — 辩=讠（辩论），辨=辶（辨别）</div>
+                <div class="wrong-item"><strong>拨 vs 拔</strong> — 拨=发（点拨），拔=友（拔河）</div>
+                <div class="wrong-item"><strong>骄 vs 娇</strong> — 骄=马（骄傲），娇=女（娇嫩）</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 四、形近字辨析 ===== -->
+    <section class="section" id="shape">
+        <h2 class="section-title"><i class="fas fa-not-equal"></i> 形近字</h2>
+        <div class="card">
+            <div class="shape-grid">
+                <div class="shape-item"><span class="shape-char">崇</span> 崇高 &nbsp;vs&nbsp; <span class="shape-char">祟</span> 鬼鬼祟祟</div>
+                <div class="shape-item"><span class="shape-char">蓬</span> 莲蓬 &nbsp;vs&nbsp; <span class="shape-char">篷</span> 帐篷</div>
+                <div class="shape-item"><span class="shape-char">沾</span> 沾水 &nbsp;vs&nbsp; <span class="shape-char">粘</span> 粘贴</div>
+                <div class="shape-item"><span class="shape-char">凑</span> 凑合 &nbsp;vs&nbsp; <span class="shape-char">奏</span> 演奏</div>
+                <div class="shape-item"><span class="shape-char">裂</span> 裂开 &nbsp;vs&nbsp; <span class="shape-char">烈</span> 热烈</div>
+                <div class="shape-item"><span class="shape-char">株</span> 植株 &nbsp;vs&nbsp; <span class="shape-char">珠</span> 珍珠</div>
+                <div class="shape-item"><span class="shape-char">待</span> 等待 &nbsp;vs&nbsp; <span class="shape-char">侍</span> 侍候</div>
+                <div class="shape-item"><span class="shape-char">蜜</span> 蜜蜂 &nbsp;vs&nbsp; <span class="shape-char">密</span> 茂密</div>
+                <div class="shape-item"><span class="shape-char">辨</span> 辨别 &nbsp;vs&nbsp; <span class="shape-char">辩</span> 辩论 &nbsp;vs&nbsp; <span class="shape-char">辫</span> 辫子</div>
+                <div class="shape-item"><span class="shape-char">拨</span> 拨动 &nbsp;vs&nbsp; <span class="shape-char">拔</span> 拔河</div>
+                <div class="shape-item"><span class="shape-char">幻</span> 幻想 &nbsp;vs&nbsp; <span class="shape-char">幼</span> 幼儿</div>
+                <div class="shape-item"><span class="shape-char">历</span> 历史 &nbsp;vs&nbsp; <span class="shape-char">厉</span> 厉害</div>
+                <div class="shape-item"><span class="shape-char">酒</span> 喝酒 &nbsp;vs&nbsp; <span class="shape-char">洒</span> 洒水</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 五、思维导图 ===== -->
+    <section class="section" id="mindmap">
+        <h2 class="section-title"><i class="fas fa-sitemap"></i> 思维导图</h2>
+        <div class="card">
+            <div id="mindmap-container">
+                <svg id="markmap-svg"></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 六、考题 ===== -->
+    <section class="section" id="quiz">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> 考题</h2>
+        <div class="card" id="quiz-container"></div>
+        <div class="card" id="quiz-result" style="display:none;"></div>
+    </section>
+
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+    <p><i class="far fa-copyright"></i> 2024 人教版三年级语文下册 · 知识点总览 &nbsp;|&nbsp; 仅供学习参考</p>
+</footer>
+
+<!-- ==================== 考题 JS ==================== -->
+<script>
+    const questions = [
+        {
+            category: "易错拼音",
+            text: '"纤细"的正确读音是？',
+            options: ['qiān xì', 'xiān xì'],
+            answer: 1,
+            desc: '"纤"读 xiān，不要读成 qiān。'
+        },
+        {
+            category: "易错拼音",
+            text: '"红彤彤"的正确读音是？',
+            options: ['hóng tóng tóng', 'hóng tōng tōng'],
+            answer: 1,
+            desc: '"彤"在"红彤彤"中读 tōng（一声），不是 tóng。'
+        },
+        {
+            category: "易错拼音",
+            text: '"朝鲜"中的"鲜"正确读音是？',
+            options: ['xiān', 'xiǎn'],
+            answer: 1,
+            desc: '"朝鲜"的"鲜"读 xiǎn，而"鲜花"读 xiān。'
+        },
+        {
+            category: "易错拼音",
+            text: '"前爪"中的"爪"正确读音是？',
+            options: ['zhuǎ', 'zhǎo'],
+            answer: 1,
+            desc: '"前爪"读 qián zhǎo，"爪"在"爪子"中读 zhuǎ。'
+        },
+        {
+            category: "多音字",
+            text: '"匀称"中的"称"应读什么？',
+            options: ['chēng', 'chèn'],
+            answer: 1,
+            desc: '"匀称"读 yún chèn，"称呼"读 chēng hū。'
+        },
+        {
+            category: "多音字",
+            text: '"花骨朵"中的"骨"应读什么？',
+            options: ['gǔ', 'gū'],
+            answer: 1,
+            desc: '"花骨朵"的"骨"读 gū，"骨头"读 gǔ tou。'
+        },
+        {
+            category: "多音字",
+            text: '"不禁"中的"禁"应读什么？',
+            options: ['jìn', 'jīn'],
+            answer: 1,
+            desc: '"不禁"读 bù jīn，"禁止"读 jìn zhǐ。'
+        },
+        {
+            category: "多音字",
+            text: '"模样"中的"模"应读什么？',
+            options: ['mó', 'mú'],
+            answer: 1,
+            desc: '"模样"读 mú yàng，"模型"读 mó xíng。'
+        },
+        {
+            category: "易错字",
+            text: '下列哪个是"辩论"的正确写法？',
+            options: ['辨论', '辩论'],
+            answer: 1,
+            desc: '"辩"中间是"讠"（言字旁，与说话有关），"辨"中间是"辶"（与区分有关）。'
+        },
+        {
+            category: "形近字",
+            text: '"崇"和"祟"哪一个是"崇高"的正确写法？',
+            options: ['崇', '祟'],
+            answer: 0,
+            desc: '"崇"上"山"下"宗"（崇高），"祟"上"出"下"示"（鬼鬼祟祟）。'
+        },
+        {
+            category: "形近字",
+            text: '"拨"和"拔"哪一个是"拔河"的正确写法？',
+            options: ['拨', '拔'],
+            answer: 1,
+            desc: '"拔"右边是"友"加一点（拔河），"拨"右边是"发"（拨动）。'
+        },
+        {
+            category: "易错字",
+            text: '"茂密"的"密"和"蜜蜂"的"蜜"，哪个对应哪个？',
+            options: ['密→蜜蜂，蜜→茂密', '蜜→蜜蜂，密→茂密'],
+            answer: 1,
+            desc: '"蜜"下面是"虫"（蜜蜂酿蜜），"密"下面是"山"（茂密如山林）。'
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        let html = '';
+        questions.forEach((q, i) => {
+            html += `<div class="q-item">`;
+            html += `<div class="q-text"><span class="q-num">${i+1}</span>${q.text}</div>`;
+            html += `<div class="q-category">【${q.category}】</div>`;
+            q.options.forEach((opt, j) => {
+                html += `<label class="q-label" data-q="${i}" data-opt="${j}">`;
+                html += `<input type="radio" name="q${i}" value="${j}"> ${opt}`;
+                html += `</label>`;
+            });
+            html += `<div class="q-desc" id="desc${i}">${q.desc}</div>`;
+            html += `</div>`;
+        });
+        html += `<button id="quiz-submit" onclick="submitQuiz()">提交答案</button>`;
+        container.innerHTML = html;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        questions.forEach((q, i) => {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            const labels = document.querySelectorAll(`.q-label[data-q="${i}"]`);
+            labels.forEach(l => {
+                l.classList.remove('q-correct', 'q-wrong');
+                l.style.pointerEvents = 'none';
+            });
+            document.querySelectorAll(`input[name="q${i}"]`).forEach(r => r.disabled = true);
+
+            if (selected) {
+                const val = parseInt(selected.value);
+                if (val === q.answer) {
+                    labels[val].classList.add('q-correct');
+                    score++;
+                } else {
+                    labels[val].classList.add('q-wrong');
+                    labels[q.answer].classList.add('q-correct');
+                }
+            } else {
+                labels[q.answer].classList.add('q-correct');
+            }
+            document.getElementById('desc' + i).classList.add('show');
+        });
+
+        document.getElementById('quiz-submit').disabled = true;
+        document.getElementById('quiz-submit').textContent = '已完成';
+
+        const total = questions.length;
+        const pct = Math.round(score / total * 100);
+        const result = document.getElementById('quiz-result');
+        result.style.display = 'block';
+        let grade = pct >= 90 ? '优秀！' : pct >= 70 ? '良好！' : pct >= 60 ? '及格' : '需加油';
+        result.innerHTML = `
+            <div class="score-box">
+                <div class="score-num">${score} / ${total}</div>
+                <div class="score-label">正确 ${score} 题 · 错误 ${total - score} 题 · 正确率 ${pct}% · ${grade}</div>
+            </div>
+        `;
+        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    renderQuiz();
+</script>
+
+<!-- ==================== MARKMAP INIT ==================== -->
+<script>
+    const mmData = {
+        title: "三年级下册·语文知识点",
+        children: [
+            {
+                title: "易读错的字（易错拼音）",
+                children: [
+                    { title: "第一单元：伶俐(líng)、掠过(lüè)、沾水(zhān)、纤细(xiān)、莲蓬(péng)、姿势(zī)" },
+                    { title: "第二单元：耕种(gēng)、懦弱(nuò)、谦虚(xū)、欣赏(xīn)、遵循(zūn)" },
+                    { title: "第三单元：屠苏(sū)、朝鲜(xiǎn)、前爪(zhǎo)、欧洲(zhōu)" },
+                    { title: "第四单元：干燥(zào)、灼伤(zhuó)、吻合(wěn)、缝隙(fèng)" },
+                    { title: "五~八单元：栅栏(zhà)、红彤彤(tōng)、呈现(chéng)" }
+                ]
+            },
+            {
+                title: "多音字（30个）",
+                children: [
+                    { title: "行(háng/xíng) 得(dé/de/děi) 散(sàn/sǎn)" },
+                    { title: "挨(āi/ái) 骨(gū/gǔ) 折(zhé/shé/zhē)" },
+                    { title: "盛(shèng/chéng) 朝(cháo/zhāo) 禁(jīn/jìn)" },
+                    { title: "称(chēng/chèn) 鲜(xiān/xiǎn) 爪(zhǎo/zhuǎ)" },
+                    { title: "卷(juǎn/juàn) 缝(féng/fèng) 差(chà/chā/chāi/cī)" },
+                    { title: "模(mó/mú) 闷(mēn/mèn) 便(biàn/pián)" }
+                ]
+            },
+            {
+                title: "易写错的字",
+                children: [
+                    { title: "第一单元：燕、融、聚、蓬、胀、崇、减" },
+                    { title: "第二单元：释、颈、虚、懦、赏、映、傲" },
+                    { title: "第四单元：醒、蜜、辨、修、检、跨" },
+                    { title: "全册高频：爽、舞、霸、艳、蜜/密、辩/辨、拨/拔" }
+                ]
+            },
+            {
+                title: "形近字（13组）",
+                children: [
+                    { title: "崇vs祟 蓬vs篷 沾vs粘 凑vs奏" },
+                    { title: "裂vs烈 株vs珠 待vs侍 蜜vs密" },
+                    { title: "辨vs辩vs辫 拨vs拔 幻vs幼 历vs厉 酒vs洒" }
+                ]
+            },
+            {
+                title: "核心考点提示",
+                children: [
+                    { title: "平翘舌音区分：zh/ch/sh 与 z/c/s" },
+                    { title: "前后鼻音区分：in/en vs ing/eng" },
+                    { title: "多音字据词定音" },
+                    { title: "形近字辨义组词" }
+                ]
+            }
+        ]
+    };
+
+    (async function() {
+        const svg = document.getElementById('markmap-svg');
+        const markmap = window.markmap;
+        const { Transformer } = markmap;
+        const transformer = new Transformer();
+        const root = transformer.transform(mmData);
+        const { Markmap } = markmap;
+        Markmap.create(svg, {
+            zoomOnMaxHeight: 0.7,
+            colorFreezeLevel: 2,
+            duration: 500,
+            nodeMinHeight: 24,
+            spacingVertical: 10,
+            spacingHorizontal: 80,
+            paddingX: 14,
+            paddingY: 8
+        }, root);
+    })();
+</script>
+
+</body>
+</html>
