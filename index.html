@@ -314,11 +314,11 @@
         .q-category { font-size: 0.75rem; color: #718096; margin-left: 2rem; }
 
         /* ========== 思维导图（纯CSS树） ========== */
-        .mindmap-card { overflow-x: auto; padding: 1.5rem 1rem; }
-        .tree { display: flex; justify-content: center; min-width: 700px; }
-        .tree-node {
-            display: flex; flex-direction: column; align-items: center;
-            position: relative; padding: 0.3rem 0.4rem;
+        .mindmap-card { overflow-x: auto; padding: 2rem 1rem 1.5rem; }
+        .tree { display: flex; flex-direction: column; align-items: center; min-width: 800px; }
+        .root-row {
+            display: flex; justify-content: center; align-items: center;
+            padding: 1rem 0 0.5rem; width: 100%;
         }
         .node-label {
             background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8;
@@ -327,48 +327,40 @@
             white-space: nowrap; position: relative; z-index: 1;
         }
         .root-label {
-            background: #2b6cb0; color: #fff; font-size: 1rem; font-weight: 700;
-            padding: 0.5rem 1.2rem; border: none; border-radius: 8px;
+            background: #2b6cb0; color: #fff; font-size: 1.1rem; font-weight: 700;
+            padding: 0.7rem 1.8rem; border: none; border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(43,108,176,0.2);
         }
-        .branch {
-            background: #fff; color: #2b6cb0; font-weight: 600;
-            border-color: #90cdf4; font-size: 0.85rem;
+        .branch-row {
+            display: flex; justify-content: center; gap: 1rem;
+            padding-top: 1.5rem; width: 100%;
+            position: relative;
         }
-        .leaf { background: #f7fafc; color: #4a5568; border-color: #e2e8f0; font-size: 0.78rem; white-space: normal; max-width: 200px; }
-        .tree-children {
-            display: flex; justify-content: center; gap: 0.3rem;
-            padding-top: 1.5rem; position: relative;
-        }
-        /* vertical line from parent to children row */
-        .tree-children::before {
+        .branch-row::before {
             content: ''; position: absolute; top: 0; left: 50%;
             width: 2px; height: 1rem; background: #90cdf4;
             transform: translateX(-50%);
         }
-        /* horizontal line connecting children */
-        .tree-children::after {
-            content: ''; position: absolute; top: 1rem; left: 5%; right: 5%;
+        .branch-col { display: flex; flex-direction: column; align-items: center; flex: 0 1 auto; }
+        .branch-label {
+            background: #fff; color: #2b6cb0; font-weight: 600;
+            border-color: #90cdf4; font-size: 0.85rem;
+            position: relative; margin-bottom: 0.3rem;
+        }
+        .branch-label::before {
+            content: ''; position: absolute; top: -1rem; left: 50%;
+            width: 2px; height: 1rem; background: #90cdf4;
+        }
+        .leaf-list { display: flex; flex-direction: column; gap: 0.2rem; padding-top: 0.3rem; }
+        .branch-col .leaf {
+            background: #f7fafc; color: #4a5568; border-color: #e2e8f0;
+            font-size: 0.75rem; white-space: normal; max-width: 200px;
+            padding: 0.25rem 0.6rem;
+        }
+        /* horizontal connector */
+        .branch-row::after {
+            content: ''; position: absolute; top: 1rem; left: 3%; right: 3%;
             height: 2px; background: #90cdf4;
-        }
-        /* vertical line from horizontal line down to each child */
-        .tree-node > .node-label::before {
-            content: ''; position: absolute; top: -1.2rem; left: 50%;
-            width: 2px; height: 1.2rem; background: #90cdf4;
-            transform: translateX(-50%);
-        }
-        .root > .node-label::before,
-        .root > .tree-children::before { display: none; }
-        .root > .tree-children::after { display: none; }
-        .tree-node:only-child > .node-label::before { display: none; }
-        /* scroll hint for mobile */
-        .mindmap-card { position: relative; }
-        .mindmap-card::after {
-            content: '← 左右滑动查看 →';
-            display: block; text-align: center; color: #a0aec0;
-            font-size: 0.75rem; margin-top: 0.5rem;
-        }
-        @media (min-width: 768px) {
-            .mindmap-card::after { display: none; }
         }
 
         /* ========== Responsive ========== */
@@ -644,55 +636,55 @@
         <h2 class="section-title"><i class="fas fa-sitemap"></i> 思维导图</h2>
         <div class="card mindmap-card">
             <div class="tree">
-                <div class="tree-node root">
+                <div class="root-row">
                     <div class="node-label root-label">三年级下册·语文知识点</div>
-                    <div class="tree-children">
-                        <div class="tree-node">
-                            <div class="node-label branch">易读错的字（易错拼音）</div>
-                            <div class="tree-children">
-                                <div class="tree-node"><div class="node-label leaf">第一单元：伶俐(líng)、掠过(lüè)、沾水(zhān)、纤细(xiān)、莲蓬(péng)、姿势(zī)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">第二单元：耕种(gēng)、懦弱(nuò)、谦虚(xū)、欣赏(xīn)、遵循(zūn)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">第三单元：屠苏(sū)、朝鲜(xiǎn)、前爪(zhǎo)、欧洲(zhōu)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">第四单元：干燥(zào)、灼伤(zhuó)、吻合(wěn)、缝隙(fèng)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">五~八单元：栅栏(zhà)、红彤彤(tōng)、呈现(chéng)</div></div>
-                            </div>
+                </div>
+                <div class="branch-row">
+                    <div class="branch-col">
+                        <div class="node-label branch-label">易读错的字（易错拼音）</div>
+                        <div class="leaf-list">
+                            <div class="node-label leaf">第一单元：伶俐(líng)、掠过(lüè)、沾水(zhān)、纤细(xiān)、莲蓬(péng)</div>
+                            <div class="node-label leaf">第二单元：耕种(gēng)、懦弱(nuò)、谦虚(xū)、欣赏(xīn)、遵循(zūn)</div>
+                            <div class="node-label leaf">第三单元：屠苏(sū)、朝鲜(xiǎn)、前爪(zhǎo)、欧洲(zhōu)</div>
+                            <div class="node-label leaf">第四单元：干燥(zào)、灼伤(zhuó)、吻合(wěn)、缝隙(fèng)</div>
+                            <div class="node-label leaf">五~八单元：栅栏(zhà)、红彤彤(tōng)、呈现(chéng)</div>
                         </div>
-                        <div class="tree-node">
-                            <div class="node-label branch">多音字</div>
-                            <div class="tree-children">
-                                <div class="tree-node"><div class="node-label leaf">行(háng/xíng) 得(dé/de/děi) 散(sàn/sǎn)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">挨(āi/ái) 骨(gū/gǔ) 折(zhé/shé/zhē)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">盛(shèng/chéng) 朝(cháo/zhāo) 禁(jīn/jìn)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">称(chēng/chèn) 鲜(xiān/xiǎn) 爪(zhǎo/zhuǎ)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">卷(juǎn/juàn) 缝(féng/fèng) 差(chà/chā/chāi/cī)</div></div>
-                                <div class="tree-node"><div class="node-label leaf">模(mó/mú) 闷(mēn/mèn) 便(biàn/pián)</div></div>
-                            </div>
+                    </div>
+                    <div class="branch-col">
+                        <div class="node-label branch-label">多音字</div>
+                        <div class="leaf-list">
+                            <div class="node-label leaf">行(háng/xíng) 得(dé/de/děi) 散(sàn/sǎn)</div>
+                            <div class="node-label leaf">挨(āi/ái) 骨(gū/gǔ) 折(zhé/shé/zhē)</div>
+                            <div class="node-label leaf">盛(shèng/chéng) 朝(cháo/zhāo) 禁(jīn/jìn)</div>
+                            <div class="node-label leaf">称(chēng/chèn) 鲜(xiān/xiǎn) 爪(zhǎo/zhuǎ)</div>
+                            <div class="node-label leaf">卷(juǎn/juàn) 缝(féng/fèng) 差(chà/chā/chāi/cī)</div>
+                            <div class="node-label leaf">模(mó/mú) 闷(mēn/mèn) 便(biàn/pián)</div>
                         </div>
-                        <div class="tree-node">
-                            <div class="node-label branch">易写错的字</div>
-                            <div class="tree-children">
-                                <div class="tree-node"><div class="node-label leaf">第一单元：燕、融、聚、蓬、胀、崇、减</div></div>
-                                <div class="tree-node"><div class="node-label leaf">第二单元：释、颈、虚、懦、赏、映、傲</div></div>
-                                <div class="tree-node"><div class="node-label leaf">第四单元：醒、蜜、辨、修、检、跨</div></div>
-                                <div class="tree-node"><div class="node-label leaf">全册高频：爽、舞、霸、艳、蜜/密、辩/辨、拨/拔</div></div>
-                            </div>
+                    </div>
+                    <div class="branch-col">
+                        <div class="node-label branch-label">易写错的字</div>
+                        <div class="leaf-list">
+                            <div class="node-label leaf">第一单元：燕、融、聚、蓬、胀、崇、减</div>
+                            <div class="node-label leaf">第二单元：释、颈、虚、懦、赏、映、傲</div>
+                            <div class="node-label leaf">第四单元：醒、蜜、辨、修、检、跨</div>
+                            <div class="node-label leaf">全册高频：爽、舞、霸、艳、蜜/密、辩/辨、拨/拔</div>
                         </div>
-                        <div class="tree-node">
-                            <div class="node-label branch">形近字</div>
-                            <div class="tree-children">
-                                <div class="tree-node"><div class="node-label leaf">崇vs祟 蓬vs篷 沾vs粘 凑vs奏</div></div>
-                                <div class="tree-node"><div class="node-label leaf">裂vs烈 株vs珠 待vs侍 蜜vs密</div></div>
-                                <div class="tree-node"><div class="node-label leaf">辨vs辩vs辫 拨vs拔 幻vs幼 历vs厉 酒vs洒</div></div>
-                            </div>
+                    </div>
+                    <div class="branch-col">
+                        <div class="node-label branch-label">形近字</div>
+                        <div class="leaf-list">
+                            <div class="node-label leaf">崇vs祟 蓬vs篷 沾vs粘 凑vs奏</div>
+                            <div class="node-label leaf">裂vs烈 株vs珠 待vs侍 蜜vs密</div>
+                            <div class="node-label leaf">辨vs辩vs辫 拨vs拔 幻vs幼 历vs厉 酒vs洒</div>
                         </div>
-                        <div class="tree-node">
-                            <div class="node-label branch">核心考点提示</div>
-                            <div class="tree-children">
-                                <div class="tree-node"><div class="node-label leaf">平翘舌音区分：zh/ch/sh 与 z/c/s</div></div>
-                                <div class="tree-node"><div class="node-label leaf">前后鼻音区分：in/en 与 ing/eng</div></div>
-                                <div class="tree-node"><div class="node-label leaf">多音字据词定音</div></div>
-                                <div class="tree-node"><div class="node-label leaf">形近字辨义组词</div></div>
-                            </div>
+                    </div>
+                    <div class="branch-col">
+                        <div class="node-label branch-label">核心考点提示</div>
+                        <div class="leaf-list">
+                            <div class="node-label leaf">平翘舌音区分：zh/ch/sh 与 z/c/s</div>
+                            <div class="node-label leaf">前后鼻音区分：in/en 与 ing/eng</div>
+                            <div class="node-label leaf">多音字据词定音</div>
+                            <div class="node-label leaf">形近字辨义组词</div>
                         </div>
                     </div>
                 </div>
