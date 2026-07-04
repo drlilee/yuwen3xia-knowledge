@@ -6,10 +6,15 @@
     <title>2024人教版三年级语文下册 · 知识点总览</title>
     <!-- Font Awesome 6 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Markmap -->
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4/dist/browser/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4/dist/browser/index.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "d3": "https://cdn.jsdelivr.net/npm/d3@7/+esm",
+            "markmap-lib": "https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4/+esm",
+            "markmap-view": "https://cdn.jsdelivr.net/npm/markmap-view@0.15.4/+esm"
+        }
+    }
+    </script>
     <style>
         /* ========== Reset & Base ========== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -777,7 +782,10 @@
 </script>
 
 <!-- ==================== MARKMAP INIT ==================== -->
-<script>
+<script type="module">
+    import { Transformer } from 'markmap-lib';
+    import { Markmap } from 'markmap-view';
+
     const mmData = {
         title: "三年级下册·语文知识点",
         children: [
@@ -831,24 +839,19 @@
         ]
     };
 
-    (async function() {
-        const svg = document.getElementById('markmap-svg');
-        const markmap = window.markmap;
-        const { Transformer } = markmap;
-        const transformer = new Transformer();
-        const root = transformer.transform(mmData);
-        const { Markmap } = markmap;
-        Markmap.create(svg, {
-            zoomOnMaxHeight: 0.7,
-            colorFreezeLevel: 2,
-            duration: 500,
-            nodeMinHeight: 24,
-            spacingVertical: 10,
-            spacingHorizontal: 80,
-            paddingX: 14,
-            paddingY: 8
-        }, root);
-    })();
+    const svg = document.getElementById('markmap-svg');
+    const transformer = new Transformer();
+    const root = transformer.transform(mmData);
+    Markmap.create(svg, {
+        zoomOnMaxHeight: 0.7,
+        colorFreezeLevel: 2,
+        duration: 500,
+        nodeMinHeight: 24,
+        spacingVertical: 10,
+        spacingHorizontal: 80,
+        paddingX: 14,
+        paddingY: 8
+    }, root);
 </script>
 
 </body>
